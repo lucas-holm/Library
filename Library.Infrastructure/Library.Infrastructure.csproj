@@ -5,11 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200128121300_initial.cs" />
+    <Compile Remove="Migrations\20200128121300_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200129145703_DatabaseSet.cs" />
+    <Compile Remove="Migrations\20200129145703_DatabaseSet.Designer.cs" />
+    <Compile Remove="Migrations\20200129150026_initial.cs" />
+    <Compile Remove="Migrations\20200129150026_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200129154200_initial.cs" />
+    <Compile Remove="Migrations\20200129154200_initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Library.Application\Library.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
