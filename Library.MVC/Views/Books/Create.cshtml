@@ -23,9 +23,9 @@
                 <span asp-validation-for="ISBN" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AuthorList" class="control-label"></label>
-                @Html.DropDownListFor(m => m.AuthorId, Model.AuthorList, "Välj författare")
-                @*@<select asp-for="AuthorList" class="form-control" asp-items="Model.AuthorList"></select>*@
+                <label asp-for="Author" class="control-label"></label>
+                @*Html.DropDownListFor(m => m.AuthorId, Model.AuthorList, "Välj författare")*@
+                <select asp-for="Author.Id" class="form-control" asp-items="Model.AuthorList"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>

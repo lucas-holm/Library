@@ -1,8 +1,10 @@
 ﻿using Library.Application.Interfaces;
 using Library.Domain;
 using Library.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Library.Infrastructure.Services
@@ -22,14 +24,15 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
-        public void UpdateBookDetails(BookDetails book)
+        public List<BookDetails> GetAllBooks()
         {
-            throw new NotImplementedException();
+            return context.BookDetails.Include(x => x.Author).ToList();
         }
 
-        public void UpdateBookDetails(int id, BookDetails book)
+
+        public BookDetails ShowBookDetails(int? id)
         {
-            throw new NotImplementedException();
+            return context.BookDetails.Where(x => x.Id == id).Include(x => x.Author).First();  
         }
     }
 }

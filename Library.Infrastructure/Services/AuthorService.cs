@@ -19,5 +19,10 @@ namespace Library.Infrastructure.Services
         {
             return context.Authors.OrderBy(x => x.Name).ToList();
         }
+
+        public Author GetAuthor(int id)
+        {
+            return context.Authors.Where(x => x.Id == id).FirstOrDefault();
+        }
     }
 }

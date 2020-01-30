@@ -13,6 +13,16 @@
     <Compile Remove="Migrations\20200129150026_initial.Designer.cs" />
     <Compile Remove="Migrations\20200129154200_initial.cs" />
     <Compile Remove="Migrations\20200129154200_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200130081737_initial.cs" />
+    <Compile Remove="Migrations\20200130081737_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200130082705_initial.cs" />
+    <Compile Remove="Migrations\20200130082705_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200130085122_initial.cs" />
+    <Compile Remove="Migrations\20200130085122_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200130090548_initial.cs" />
+    <Compile Remove="Migrations\20200130090548_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200130092240_initial.cs" />
+    <Compile Remove="Migrations\20200130092240_initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,10 +31,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Library.Application\Library.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

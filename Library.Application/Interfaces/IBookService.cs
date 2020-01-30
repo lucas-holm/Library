@@ -13,11 +13,6 @@ namespace Library.Application.Interfaces
         /// <param name="book"></param>
         void AddBook(BookDetails book);
 
-        /// <summary>
-        /// Updates a book
-        /// </summary>
-        /// <param name="book"></param>
-        void UpdateBookDetails(BookDetails book);
 
 
         /// <summary>
@@ -25,7 +20,9 @@ namespace Library.Application.Interfaces
         /// </summary>
         /// <param name="id"></param>
         /// <param name="book"></param>
-        void UpdateBookDetails(int id, BookDetails book);
+        BookDetails ShowBookDetails(int? id);
+
+        List<BookDetails> GetAllBooks();
 
     }
 }

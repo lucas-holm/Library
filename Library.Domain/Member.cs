@@ -9,6 +9,6 @@ namespace Library.Domain
         public int Id { get; set; }
         public string SSN { get; set; }
         public string Name { get; set; }
-        public IList<Loan> Loans { get; set; }
+        public ICollection<Loan> Loans { get; set; }
     }
 }
