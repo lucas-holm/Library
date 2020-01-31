@@ -13,13 +13,12 @@ namespace Library.Application.Interfaces
         /// <param name="book"></param>
         void AddBook(BookDetails book);
 
-
-
         /// <summary>
-        /// Updates a book with new values
+        /// Updates the database with the edited book
         /// </summary>
-        /// <param name="id"></param>
         /// <param name="book"></param>
+        void UpdateBook(BookDetails book);
+        void DeleteBook(int id);
         BookDetails ShowBookDetails(int? id);
 
         List<BookDetails> GetAllBooks();

@@ -13,6 +13,7 @@ namespace Library.MVC.Models
         public string Title { get; set; }
         public string ISBN { get; set; }
         public Author Author { get; set; }
+        public int AuthorId { get; set; }
         public SelectList AuthorList { get; set; }
         public string Description { get; set; }
     }

@@ -23,6 +23,12 @@
     <Compile Remove="Migrations\20200130090548_initial.Designer.cs" />
     <Compile Remove="Migrations\20200130092240_initial.cs" />
     <Compile Remove="Migrations\20200130092240_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200130092526_initial.cs" />
+    <Compile Remove="Migrations\20200130092526_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200131084116_iia.cs" />
+    <Compile Remove="Migrations\20200131084116_iia.Designer.cs" />
+    <Compile Remove="Migrations\20200131104519_updatedBookCopy.cs" />
+    <Compile Remove="Migrations\20200131104519_updatedBookCopy.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

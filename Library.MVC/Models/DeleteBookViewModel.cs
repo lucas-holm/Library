@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Library.Domain;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Library.Domain
+namespace Library.MVC.Models
 {
-    public class BookDetails
+    public class DeleteBookViewModel
     {
-        public int Id { get; set; }
+        public int BookDetailsId { get; set; }
         public string Title { get; set; }
         public Author Author { get; set; }
         public string ISBN { get; set; }
-        public int AuthorId { get; set; }
         public string Description { get; set; }
-        public ICollection<BookCopy> Copies { get; set; }
 
     }
 }

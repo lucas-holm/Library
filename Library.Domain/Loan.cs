@@ -9,7 +9,7 @@ namespace Library.Domain
         public int Id { get; set; }
         public BookCopy BookCopy { get; set; }
         public Member Member { get; set; }
-        public string LoanStart { get; set; }
-        public string LoanEnd { get; set; }
+        public DateTime LoanStart { get; set; }
+        public DateTime LoanEnd { get; set; }
     }
 }

@@ -24,15 +24,27 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
+        public void DeleteBook(int id)
+        {
+            context.BookDetails.Remove(context.BookDetails.Where(x => x.Id == id).FirstOrDefault());
+            context.SaveChanges();
+        }
+
         public List<BookDetails> GetAllBooks()
         {
-            return context.BookDetails.Include(x => x.Author).ToList();
+            return context.BookDetails.Include(x => x.Author).Include(y => y.Copies).ToList();
         }
 
 
         public BookDetails ShowBookDetails(int? id)
         {
             return context.BookDetails.Where(x => x.Id == id).Include(x => x.Author).First();  
+        }
+
+        public void UpdateBook(BookDetails book)
+        {
+            context.Update(book);
+            context.SaveChanges();
         }
     }
 }
