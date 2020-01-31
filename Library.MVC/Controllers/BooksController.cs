@@ -65,19 +65,24 @@ namespace Library.MVC.Controllers
             if (ModelState.IsValid)
             {
 
-                //Skapa ny bok
                 var newBook = new BookDetails();
                 vm.AuthorList = new SelectList(authorService.GetAllAuthors(), "Id", "Name");
+
                 newBook.Author = authorService.GetAuthor(vm.Author.Id);
                 newBook.Description = vm.Description;
                 newBook.Title = vm.Title;
                 newBook.ISBN = vm.ISBN;
-                //Lägg till i contex
+
+                for (int i = 0; i < vm.NumberOfCopies; i++)
+                {
+                    newBook.Copies.Add(new BookCopy());
+                }
                 bookService.AddBook(newBook);
+
                 //Visa /Books/Index
                 return RedirectToAction(nameof(Index));
-            }
 
+            }
 
             return RedirectToAction("Error", "Home", "");
         }
@@ -118,8 +123,9 @@ namespace Library.MVC.Controllers
             bookDetails.Description = vm.Description;
             bookDetails.ISBN = vm.ISBN;
             bookDetails.Title = vm.Title;
+            
             bookService.UpdateBook(bookDetails);
-
+                                 
             return RedirectToAction(nameof(Index));
 
             //    if (id != bookDetails.Id)

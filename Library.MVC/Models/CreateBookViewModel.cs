@@ -19,5 +19,7 @@ namespace Library.MVC.Models
         [Required]
         public string ISBN { get; set; }
         public string Description { get; set; }
+        public int NumberOfCopies { get; set; }
+        public ICollection<BookCopy> Copies { get; set; }
     }
 }

@@ -29,12 +29,16 @@ namespace Library.Infrastructure.Services
             context.BookDetails.Remove(context.BookDetails.Where(x => x.Id == id).FirstOrDefault());
             context.SaveChanges();
         }
-
+        
         public List<BookDetails> GetAllBooks()
         {
             return context.BookDetails.Include(x => x.Author).Include(y => y.Copies).ToList();
         }
 
+        public BookDetails GetBook(int? id)
+        {
+                return context.BookDetails.Where(x => x.Id == id).FirstOrDefault();
+        }
 
         public BookDetails ShowBookDetails(int? id)
         {

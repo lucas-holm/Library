@@ -22,6 +22,7 @@ namespace Library.Application.Interfaces
         BookDetails ShowBookDetails(int? id);
 
         List<BookDetails> GetAllBooks();
+        BookDetails GetBook(int? id);
 
     }
 }
