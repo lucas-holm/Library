@@ -10,5 +10,6 @@ namespace Library.Application.Interfaces
         IList<Author> GetAllAuthors();
 
         Author GetAuthor(int id);
+
     }
 }

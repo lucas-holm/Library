@@ -24,5 +24,7 @@ namespace Library.Application.Interfaces
         List<BookDetails> GetAllBooks();
         BookDetails GetBook(int? id);
 
+        List<BookCopy> GetAllBookCopies(int id);
+
     }
 }

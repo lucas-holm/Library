@@ -1,6 +1,7 @@
 ﻿using Library.Application.Interfaces;
 using Library.Domain;
 using Library.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Library.Infrastructure.Services
 
         public Author GetAuthor(int id)
         {
-            return context.Authors.Where(x => x.Id == id).FirstOrDefault();
+            return context.Authors.Where(x => x.Id == id).Include(x => x.Books).FirstOrDefault();
         }
     }
 }

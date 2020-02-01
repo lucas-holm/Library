@@ -1,10 +1,10 @@
-﻿@model Library.MVC.Models.IndexBookViewModel
+﻿@model Library.MVC.Models.CopyInfoViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Copy Info";
 }
 
-<h1>Index</h1>
+<h1>Copy Info</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -12,31 +12,36 @@
 <table class="table">
     <thead>
         <tr>
+            <th>ID</th>
             <th>ISBN</th>
             <th>Titel</th>
             <th>Författare</th>
-            <th>Beskrivning</th>
-            <th>Exemplar</th>
+            <th>Skick</th>
+            <th>Status</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Books) {
+        @foreach (var item in Model.Copies)
+        {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ISBN)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.Details.ISBN)
             </td>
             <td>
-                <a asp-action="AuthorInfo" asp-route-id="@item.Author.Id"> @Html.DisplayFor(modelItem => item.Author.Name)</a>
+                @Html.DisplayFor(modelItem => item.Details.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Details.Author.Name)
             </td>
             <td>
-                <a asp-action="CopyInfo" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Copies.Count)</a>
+                @Html.DisplayFor(modelItem => item.Condition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookStatus)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
@@ -44,6 +49,8 @@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
+
+

@@ -10,6 +10,8 @@ namespace Library.Domain
         public int DetailsId { get; set; }
         public BookDetails Details { get; set; }
         public DateTime? LoanStart { get; set; }
+
+        public BookStatus BookStatus { get; set; }
         
     }
 }

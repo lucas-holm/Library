@@ -187,5 +187,24 @@ namespace Library.MVC.Controllers
             bookService.DeleteBook(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult CopyInfo(int id)
+        {
+            var vm = new CopyInfoViewModel();
+            vm.Copies = bookService.GetAllBookCopies(id);
+
+            return View(vm);
+        }
+
+        public IActionResult AuthorInfo(int id)
+        {
+            var vm = new AuthorInfoViewModel();
+
+            var author = authorService.GetAuthor(id);
+            vm.Name = author.Name;
+            vm.Books = author.Books;
+
+            return View(vm);
+        }
     }
 }
