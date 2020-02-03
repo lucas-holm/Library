@@ -192,6 +192,7 @@ namespace Library.MVC.Controllers
         {
             var vm = new CopyInfoViewModel();
             vm.Copies = bookService.GetAllBookCopies(id);
+            vm.BookDetailsId = id;
 
             return View(vm);
         }
@@ -205,6 +206,51 @@ namespace Library.MVC.Controllers
             vm.Books = author.Books;
 
             return View(vm);
+        }
+
+        public IActionResult CreateCopy(int id)
+        {
+            var vm = new CreateCopyViewModel();
+            var bookDetails = bookService.GetBook(id);
+            vm.BookDetailsId = bookDetails.Id;
+            
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateCopy(CreateCopyViewModel vm)
+        {
+            var bookDetails = bookService.GetBook(vm.BookDetailsId);
+            
+
+            for (int i = 0; i < vm.NumberOfCopies; i++)
+            {
+                bookDetails.Copies.Add(new BookCopy());
+            }
+
+            bookService.UpdateBook(bookDetails);
+
+            return RedirectToAction(nameof(CopyInfo), new { id = vm.BookDetailsId });
+        }
+
+        public IActionResult DeleteCopy(int id)
+        {
+            var vm = new DeleteCopyViewModel();
+            var copy = bookService.GetBookCopy(id);
+            vm.BookStatus = copy.BookStatus;
+            vm.Condition = copy.Condition;
+            vm.Id = id;
+
+            return View(vm);
+        }
+
+        [HttpPost, ActionName("DeleteCopy")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteCopyConfirmed(int id)
+        {
+            bookService.DeleteCopy(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

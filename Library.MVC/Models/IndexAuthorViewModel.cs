@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Library.MVC.Models
 {
-    public class CopyInfoViewModel
+    public class IndexAuthorViewModel
     {
-        public int BookDetailsId { get; set; }
-        public ICollection<BookCopy> Copies { get; set; } = new List<BookCopy>();
+        public ICollection<Author> Authors { get; set; } = new List<Author>();
     }
 }

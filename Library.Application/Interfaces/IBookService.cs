@@ -26,5 +26,9 @@ namespace Library.Application.Interfaces
 
         List<BookCopy> GetAllBookCopies(int id);
 
+        void DeleteCopy(int id);
+
+        BookCopy GetBookCopy(int id);
+
     }
 }

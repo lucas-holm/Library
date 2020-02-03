@@ -30,6 +30,12 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
+        public void DeleteCopy(int id)
+        {
+            context.BookCopies.Remove(context.BookCopies.Where(x => x.Id == id).FirstOrDefault());
+            context.SaveChanges();
+        }
+
         public List<BookCopy> GetAllBookCopies(int id)
         {
             return context.BookCopies.Where(x => x.DetailsId == id).Include(x => x.Details.Author).ToList();
@@ -43,6 +49,11 @@ namespace Library.Infrastructure.Services
         public BookDetails GetBook(int? id)
         {
                 return context.BookDetails.Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public BookCopy GetBookCopy(int id)
+        {
+            return context.BookCopies.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public BookDetails ShowBookDetails(int? id)
