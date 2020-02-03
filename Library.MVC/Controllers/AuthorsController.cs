@@ -1,4 +1,5 @@
 ﻿using Library.Application.Interfaces;
+using Library.Domain;
 using Library.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,6 +25,21 @@ namespace Library.MVC.Controllers
             var vm = new IndexAuthorViewModel();
             vm.Authors = authorService.GetAllAuthors();
             return View(vm);
+        }
+        public IActionResult CreateAuthor()
+        {
+            var vm = new CreateAuthorViewModel();
+            return View(vm);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateAuthor(CreateAuthorViewModel vm)
+        {
+            var author = new Author();
+            author.Name = vm.Name;
+            authorService.AddAuthor(author);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

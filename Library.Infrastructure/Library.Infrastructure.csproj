@@ -27,8 +27,14 @@
     <Compile Remove="Migrations\20200130092526_initial.Designer.cs" />
     <Compile Remove="Migrations\20200131084116_iia.cs" />
     <Compile Remove="Migrations\20200131084116_iia.Designer.cs" />
+    <Compile Remove="Migrations\20200131084705_initial.cs" />
+    <Compile Remove="Migrations\20200131084705_initial.Designer.cs" />
     <Compile Remove="Migrations\20200131104519_updatedBookCopy.cs" />
     <Compile Remove="Migrations\20200131104519_updatedBookCopy.Designer.cs" />
+    <Compile Remove="Migrations\20200131105429_Updated-Book-Copy.cs" />
+    <Compile Remove="Migrations\20200131105429_Updated-Book-Copy.Designer.cs" />
+    <Compile Remove="Migrations\20200201102043_BookStatus.cs" />
+    <Compile Remove="Migrations\20200201102043_BookStatus.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200131084705_initial")]
+    [Migration("20200203114706_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,8 +60,17 @@ namespace Library.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DetailsId")
+                    b.Property<int>("BookStatus")
                         .HasColumnType("int");
+
+                    b.Property<int>("Condition")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DetailsId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LoanStart")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -73,16 +82,22 @@ namespace Library.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
+                            BookStatus = 0,
+                            Condition = 0,
                             DetailsId = 1
                         },
                         new
                         {
                             Id = 2,
+                            BookStatus = 0,
+                            Condition = 2,
                             DetailsId = 2
                         },
                         new
                         {
                             Id = 3,
+                            BookStatus = 0,
+                            Condition = 1,
                             DetailsId = 3
                         });
                 });
@@ -94,7 +109,7 @@ namespace Library.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AuthorId")
+                    b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -149,11 +164,11 @@ namespace Library.Infrastructure.Migrations
                     b.Property<int?>("BookCopyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("LoanEnd")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("LoanEnd")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("LoanStart")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("LoanStart")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("MemberId")
                         .HasColumnType("int");
@@ -209,14 +224,18 @@ namespace Library.Infrastructure.Migrations
                 {
                     b.HasOne("Library.Domain.BookDetails", "Details")
                         .WithMany("Copies")
-                        .HasForeignKey("DetailsId");
+                        .HasForeignKey("DetailsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Library.Domain.BookDetails", b =>
                 {
                     b.HasOne("Library.Domain.Author", "Author")
                         .WithMany("Books")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Library.Domain.Loan", b =>

@@ -9,28 +9,27 @@ using System.Text;
 
 namespace Library.Infrastructure.Services
 {
-    public class AuthorService : IAuthorService
+    public class MemberService : IMemberService
     {
         private readonly ApplicationDbContext context;
-        public AuthorService(ApplicationDbContext context)
+        public MemberService(ApplicationDbContext context)
         {
             this.context = context;
         }
-
-        public void AddAuthor(Author author)
+        public void AddMember(Member member)
         {
-            context.Add(author);
+            context.Add(member);
             context.SaveChanges();
         }
 
-        public IList<Author> GetAllAuthors()
+        public IList<Member> GetAllMembers()
         {
-            return context.Authors.OrderBy(x => x.Name).ToList();
+            return context.Members.OrderBy(x => x.Name).ToList();
         }
 
-        public Author GetAuthor(int id)
+        public Author GetMember(int id)
         {
-            return context.Authors.Where(x => x.Id == id).Include(x => x.Books).FirstOrDefault();
+            throw new NotImplementedException();
         }
     }
 }

@@ -5,12 +5,11 @@ using System.Text;
 
 namespace Library.Application.Interfaces
 {
-    public interface IAuthorService
+    public interface IMemberService
     {
-        IList<Author> GetAllAuthors();
+        IList<Member> GetAllMembers();
 
-        Author GetAuthor(int id);
-        void AddAuthor(Author author);
-
+        Author GetMember(int id);
+        void AddMember(Member member);
     }
 }

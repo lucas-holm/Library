@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Library.Infrastructure.Migrations
 {
@@ -40,8 +41,8 @@ namespace Library.Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
-                    AuthorId = table.Column<int>(nullable: true),
                     ISBN = table.Column<string>(nullable: true),
+                    AuthorId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -52,7 +53,7 @@ namespace Library.Infrastructure.Migrations
                         column: x => x.AuthorId,
                         principalTable: "Authors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,7 +62,10 @@ namespace Library.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DetailsId = table.Column<int>(nullable: true)
+                    Condition = table.Column<int>(nullable: false),
+                    DetailsId = table.Column<int>(nullable: false),
+                    LoanStart = table.Column<DateTime>(nullable: true),
+                    BookStatus = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,7 +75,7 @@ namespace Library.Infrastructure.Migrations
                         column: x => x.DetailsId,
                         principalTable: "BookDetails",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,8 +86,8 @@ namespace Library.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BookCopyId = table.Column<int>(nullable: true),
                     MemberId = table.Column<int>(nullable: true),
-                    LoanStart = table.Column<string>(nullable: true),
-                    LoanEnd = table.Column<string>(nullable: true)
+                    LoanStart = table.Column<DateTime>(nullable: false),
+                    LoanEnd = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -139,18 +143,18 @@ namespace Library.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "BookCopies",
-                columns: new[] { "Id", "DetailsId" },
-                values: new object[] { 1, 1 });
+                columns: new[] { "Id", "BookStatus", "Condition", "DetailsId", "LoanStart" },
+                values: new object[] { 1, 0, 0, 1, null });
 
             migrationBuilder.InsertData(
                 table: "BookCopies",
-                columns: new[] { "Id", "DetailsId" },
-                values: new object[] { 2, 2 });
+                columns: new[] { "Id", "BookStatus", "Condition", "DetailsId", "LoanStart" },
+                values: new object[] { 2, 0, 2, 2, null });
 
             migrationBuilder.InsertData(
                 table: "BookCopies",
-                columns: new[] { "Id", "DetailsId" },
-                values: new object[] { 3, 3 });
+                columns: new[] { "Id", "BookStatus", "Condition", "DetailsId", "LoanStart" },
+                values: new object[] { 3, 0, 1, 3, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookCopies_DetailsId",
