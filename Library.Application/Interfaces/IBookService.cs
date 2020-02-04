@@ -30,5 +30,7 @@ namespace Library.Application.Interfaces
 
         BookCopy GetBookCopy(int id);
 
+        BookCopy GetLoanCopy(int id);
+
     }
 }

@@ -9,7 +9,9 @@ namespace Library.Application.Interfaces
     {
         IList<Member> GetAllMembers();
 
-        Author GetMember(int id);
+        Member GetMember(int id);
         void AddMember(Member member);
+
+        void UpdateMember(Member member);
     }
 }

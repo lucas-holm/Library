@@ -27,9 +27,15 @@ namespace Library.Infrastructure.Services
             return context.Members.OrderBy(x => x.Name).ToList();
         }
 
-        public Author GetMember(int id)
+        public Member GetMember(int id)
         {
-            throw new NotImplementedException();
+            return context.Members.Include(x => x.Loans).Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public void UpdateMember(Member member)
+        {
+            context.Update(member);
+            context.SaveChanges();
         }
     }
 }

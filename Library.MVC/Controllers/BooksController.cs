@@ -28,6 +28,7 @@ namespace Library.MVC.Controllers
             var vm = new IndexBookViewModel();
             vm.Books = bookService.GetAllBooks();
             return View(vm);
+            
         }
 
         //GET: Books/Details/5

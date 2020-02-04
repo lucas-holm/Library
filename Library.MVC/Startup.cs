@@ -31,6 +31,7 @@ namespace Library.MVC
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<ILoanService, LoanService>();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Library"),
                 x => x.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
             );

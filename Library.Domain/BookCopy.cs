@@ -11,7 +11,18 @@ namespace Library.Domain
         public BookDetails Details { get; set; }
         public DateTime? LoanStart { get; set; }
 
-        public BookStatus BookStatus { get; set; }
+        public BookStatus BookStatus {
+            get
+            {
+                if (LoanStart == null)
+                {
+                    return BookStatus.In;
+                }
+
+                return BookStatus.Out;
+            }
+        }
+
         
     }
 }

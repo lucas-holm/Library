@@ -5,19 +5,24 @@ using System.Threading.Tasks;
 using Library.Application.Interfaces;
 using Library.Domain;
 using Library.MVC.Models;
+using Library.MVC.Models.Loans;
+using Library.MVC.Models.Members;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Library.MVC.Controllers
 {
     public class MembersController : Controller
     {
         private readonly IMemberService memberService;
+        private readonly IBookService bookService;
 
 
-        public MembersController(IMemberService memberService)
+        public MembersController(IMemberService memberService, IBookService bookService)
         {
             this.memberService = memberService;
+            this.bookService = bookService;
 
         }
         // GET: Members
@@ -32,7 +37,14 @@ namespace Library.MVC.Controllers
         // GET: Members/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var vm = new DetailsMemberViewModel();
+            var member = memberService.GetMember(id);
+            vm.Id = member.Id;
+            vm.SSN = member.SSN;
+            vm.Name = member.Name;
+            vm.Loans = member.Loans;
+
+            return View(vm);
         }
 
         // GET: Members/Create
@@ -109,6 +121,36 @@ namespace Library.MVC.Controllers
             {
                 return View();
             }
+        }
+
+        public IActionResult CreateLoan(int id)
+        {
+            var vm = new CreateLoanViewModel();
+            vm.MemberId = id;
+            vm.BookDetailsList = new SelectList(bookService.GetAllBooks(), "Id", "Title");
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateLoan(CreateLoanViewModel vm)
+        {
+
+            var loan = new Loan();
+            //vm.BookDetailsList = new SelectList(bookService.GetAllBooks(), "Id", "Title");
+            var member = memberService.GetMember(vm.MemberId);
+            
+            var copy = bookService.GetLoanCopy(vm.BookDetails.Id);
+            loan.BookCopy = copy;
+            loan.Member = member;
+
+
+            member.Loans.Add(loan);
+
+            memberService.UpdateMember(member);
+
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
