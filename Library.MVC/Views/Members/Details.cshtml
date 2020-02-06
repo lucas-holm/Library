@@ -28,21 +28,48 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Loans)
-        </dt>
-        
+        </dl>
+</div>
+
+
+<h4>Loans</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Copy Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
         @foreach (var item in Model.Loans)
         {
-            <dd class="col-sm-10">
-                @Html.DisplayFor(modelItem => item.LoanStart)
-            </dd>
-        }
+            @if (item.BookCopy.LoanStart != null)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookCopy.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookCopy.Details.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookCopy.Details.Author.Name)
+                    </td>
+                    <td>
+                        <a asp-action="ReturnCopy" asp-route-loanid="@item.Id" asp-route-id="@item.BookCopy.Id" asp-route-vmid="@Model.Id">Return book</a>
+                    </td>
+                </tr>
+            }
 
-    </dl>
-</div>
+        }
+    </tbody>
+</table>
+
 <div>
     <a asp-route-id="@Model.Id" asp-action="CreateLoan">Create new loan</a> |
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
+
 </div>

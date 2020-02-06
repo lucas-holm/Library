@@ -12,30 +12,71 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Copy Id</th>
             <th>Member</th>
-            <th>LoanStart</th>
-            <th>LoanEnd</th>
+            <th>Title</th>
+            <th>Loan Start</th>
+            <th>Loan End</th>
+            <th>Returned</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Loans)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Member.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LoanStart)
-                </td>
-                <td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookCopy.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookCopy.Details.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoanStart)
+            </td>
+            <td>
+                @if (item.LoanReturned == null && DateTime.Now > item.LoanEnd)
+                {
+                    <span style="color:red;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
+                }
+
+                else if (item.LoanReturned > item.LoanEnd)
+                {
+                    <span style="color:red;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
+                }
+                else
+                {
                     @Html.DisplayFor(modelItem => item.LoanEnd)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+                }
+
+            </td>
+            <td>
+                @if (item.LoanReturned == null)
+                {
+
+                }
+                else
+                {
+                    @if (item.LoanReturned > item.LoanEnd)
+                    {
+                        <span style="color:red;">@Html.DisplayFor(modelItem => item.LoanReturned)</span>
+                    }
+                    else
+                    {
+                        <span style="color:green;">@Html.DisplayFor(modelItem => item.LoanReturned)</span>
+                    }
+                    
+                }
+
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

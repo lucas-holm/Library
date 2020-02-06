@@ -11,5 +11,6 @@ namespace Library.Domain
         public Member Member { get; set; }
         public DateTime LoanStart { get; set; }
         public DateTime LoanEnd { get; set; }
+        public DateTime? LoanReturned { get; set; }
     }
 }

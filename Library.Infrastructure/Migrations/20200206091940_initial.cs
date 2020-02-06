@@ -64,8 +64,7 @@ namespace Library.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Condition = table.Column<int>(nullable: false),
                     DetailsId = table.Column<int>(nullable: false),
-                    LoanStart = table.Column<DateTime>(nullable: true),
-                    BookStatus = table.Column<int>(nullable: false)
+                    LoanStart = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,7 +86,8 @@ namespace Library.Infrastructure.Migrations
                     BookCopyId = table.Column<int>(nullable: true),
                     MemberId = table.Column<int>(nullable: true),
                     LoanStart = table.Column<DateTime>(nullable: false),
-                    LoanEnd = table.Column<DateTime>(nullable: false)
+                    LoanEnd = table.Column<DateTime>(nullable: false),
+                    LoanReturned = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -143,18 +143,18 @@ namespace Library.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "BookCopies",
-                columns: new[] { "Id", "BookStatus", "Condition", "DetailsId", "LoanStart" },
-                values: new object[] { 1, 0, 0, 1, null });
+                columns: new[] { "Id", "Condition", "DetailsId", "LoanStart" },
+                values: new object[] { 1, 0, 1, null });
 
             migrationBuilder.InsertData(
                 table: "BookCopies",
-                columns: new[] { "Id", "BookStatus", "Condition", "DetailsId", "LoanStart" },
-                values: new object[] { 2, 0, 2, 2, null });
+                columns: new[] { "Id", "Condition", "DetailsId", "LoanStart" },
+                values: new object[] { 2, 2, 2, null });
 
             migrationBuilder.InsertData(
                 table: "BookCopies",
-                columns: new[] { "Id", "BookStatus", "Condition", "DetailsId", "LoanStart" },
-                values: new object[] { 3, 0, 1, 3, null });
+                columns: new[] { "Id", "Condition", "DetailsId", "LoanStart" },
+                values: new object[] { 3, 1, 3, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookCopies_DetailsId",

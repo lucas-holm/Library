@@ -18,7 +18,18 @@ namespace Library.Infrastructure.Services
         }
         public List<Loan> GetAllLoans()
         {
-            return context.Loans.Include(x => x.Member).ToList();
+            return context.Loans.Include(x => x.Member).Include(x => x.BookCopy).ThenInclude(x => x.Details).ToList();
+        }
+
+        public Loan GetLoan(int id)
+        {
+            return context.Loans.Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public void UpdateLoan(Loan loan)
+        {
+            context.Update(loan);
+            context.SaveChanges();
         }
     }
 }

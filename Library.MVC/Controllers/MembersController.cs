@@ -17,12 +17,14 @@ namespace Library.MVC.Controllers
     {
         private readonly IMemberService memberService;
         private readonly IBookService bookService;
+        private readonly ILoanService loanService;
 
 
-        public MembersController(IMemberService memberService, IBookService bookService)
+        public MembersController(IMemberService memberService, IBookService bookService, ILoanService loanService)
         {
             this.memberService = memberService;
             this.bookService = bookService;
+            this.loanService = loanService;
 
         }
         // GET: Members
@@ -135,7 +137,7 @@ namespace Library.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateLoan(CreateLoanViewModel vm)
         {
-
+            var date = DateTime.Now;
             var loan = new Loan();
             //vm.BookDetailsList = new SelectList(bookService.GetAllBooks(), "Id", "Title");
             var member = memberService.GetMember(vm.MemberId);
@@ -143,13 +145,33 @@ namespace Library.MVC.Controllers
             var copy = bookService.GetLoanCopy(vm.BookDetails.Id);
             loan.BookCopy = copy;
             loan.Member = member;
-
-
+            loan.LoanStart = date;
+            loan.BookCopy.LoanStart = date;
+            loan.LoanEnd = date.AddSeconds(10);
+            
             member.Loans.Add(loan);
 
             memberService.UpdateMember(member);
 
 
+            return RedirectToAction(nameof(Index));
+        }
+
+        
+        public IActionResult ReturnCopy(int loanid, int id, int vmid)
+        {
+            var date = DateTime.Now;
+            var copy = bookService.GetBookCopy(id);
+            //var member = memberService.GetMember(vmid);
+            var loan = loanService.GetLoan(loanid);
+            copy.LoanStart = null;
+            loan.LoanReturned = date;
+
+            loanService.UpdateLoan(loan);
+            bookService.UpdateCopy(copy);
+            
+
+            
             return RedirectToAction(nameof(Index));
         }
     }

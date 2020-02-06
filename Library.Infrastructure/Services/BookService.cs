@@ -58,7 +58,7 @@ namespace Library.Infrastructure.Services
 
         public BookCopy GetLoanCopy(int id)
         {
-            return context.BookCopies.Where(x => x.DetailsId == id).FirstOrDefault();
+            return context.BookCopies.Where(x => x.DetailsId == id).FirstOrDefault(x => x.LoanStart == null);
         }
 
         public BookDetails ShowBookDetails(int? id)
@@ -69,6 +69,12 @@ namespace Library.Infrastructure.Services
         public void UpdateBook(BookDetails book)
         {
             context.Update(book);
+            context.SaveChanges();
+        }
+
+        public void UpdateCopy(BookCopy copy)
+        {
+            context.Update(copy);
             context.SaveChanges();
         }
     }

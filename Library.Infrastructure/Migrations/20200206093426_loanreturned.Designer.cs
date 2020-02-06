@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200203114706_initial")]
-    partial class initial
+    [Migration("20200206093426_loanreturned")]
+    partial class loanreturned
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,9 +60,6 @@ namespace Library.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BookStatus")
-                        .HasColumnType("int");
-
                     b.Property<int>("Condition")
                         .HasColumnType("int");
 
@@ -82,21 +79,18 @@ namespace Library.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            BookStatus = 0,
                             Condition = 0,
                             DetailsId = 1
                         },
                         new
                         {
                             Id = 2,
-                            BookStatus = 0,
                             Condition = 2,
                             DetailsId = 2
                         },
                         new
                         {
                             Id = 3,
-                            BookStatus = 0,
                             Condition = 1,
                             DetailsId = 3
                         });
@@ -165,6 +159,9 @@ namespace Library.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LoanEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LoanReturned")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LoanStart")

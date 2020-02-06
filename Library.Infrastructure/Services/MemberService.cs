@@ -29,7 +29,13 @@ namespace Library.Infrastructure.Services
 
         public Member GetMember(int id)
         {
-            return context.Members.Include(x => x.Loans).Where(x => x.Id == id).FirstOrDefault();
+            return context.Members
+                .Where(x => x.Id == id)
+                .Include(x => x.Loans)
+                .ThenInclude(x => x.BookCopy)
+                .ThenInclude(x => x.Details)
+                .ThenInclude(x => x.Author)
+                .FirstOrDefault();
         }
 
         public void UpdateMember(Member member)

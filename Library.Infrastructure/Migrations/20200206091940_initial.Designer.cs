@@ -4,14 +4,16 @@ using Library.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200206091940_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,7 +161,7 @@ namespace Library.Infrastructure.Migrations
                     b.Property<DateTime>("LoanEnd")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("LoanReturned")
+                    b.Property<DateTime>("LoanReturned")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LoanStart")
