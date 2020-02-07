@@ -24,12 +24,15 @@ namespace Library.MVC.Controllers
         }
         public IActionResult Index()
         {
-
             var vm = new IndexLoanViewModel();
 
             vm.Loans = loanService.GetAllLoans();
+            
+
+
             return View(vm);
         }
+
 
         
     }

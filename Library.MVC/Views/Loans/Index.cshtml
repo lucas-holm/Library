@@ -6,9 +6,6 @@
 
 <h1>Loans</h1>
 
-<p>
-    <a asp-action="CreateMember">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -18,6 +15,7 @@
             <th>Loan Start</th>
             <th>Loan End</th>
             <th>Returned</th>
+            <th>Fee</th>
         </tr>
     </thead>
     <tbody>
@@ -67,13 +65,14 @@
                     {
                         <span style="color:green;">@Html.DisplayFor(modelItem => item.LoanReturned)</span>
                     }
-                    
+
                 }
 
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                @Html.DisplayFor(modelItem => item.Fee)
+            </td>
+            <td>
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

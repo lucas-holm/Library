@@ -47,29 +47,29 @@
         {
             @if (item.BookCopy.LoanStart != null)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookCopy.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookCopy.Details.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookCopy.Details.Author.Name)
-                    </td>
-                    <td>
-                        <a asp-action="ReturnCopy" asp-route-loanid="@item.Id" asp-route-id="@item.BookCopy.Id" asp-route-vmid="@Model.Id">Return book</a>
-                    </td>
-                </tr>
+                if (item.LoanReturned == null)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookCopy.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookCopy.Details.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookCopy.Details.Author.Name)
+                        </td>
+                        <td>
+                            <a asp-action="ReturnCopy" asp-route-loanid="@item.Id" asp-route-id="@item.BookCopy.Id">Return book</a>
+                        </td>
+                    </tr>
+                }
             }
-
         }
     </tbody>
 </table>
 
 <div>
     <a asp-route-id="@Model.Id" asp-action="CreateLoan">Create new loan</a> |
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
-
 </div>

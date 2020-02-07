@@ -87,7 +87,7 @@ namespace Library.Infrastructure.Migrations
                     MemberId = table.Column<int>(nullable: true),
                     LoanStart = table.Column<DateTime>(nullable: false),
                     LoanEnd = table.Column<DateTime>(nullable: false),
-                    LoanReturned = table.Column<DateTime>(nullable: false)
+                    LoanReturned = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {

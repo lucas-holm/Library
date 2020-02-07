@@ -36,6 +36,11 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
+        public List<BookDetails> GetAllAvailableBooks()
+        {
+             return context.BookDetails.Where(x => x.Copies.Any(x => x.LoanStart == null)).ToList();
+        }
+
         public List<BookCopy> GetAllBookCopies(int id)
         {
             return context.BookCopies.Where(x => x.DetailsId == id).Include(x => x.Details.Author).ToList();

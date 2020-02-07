@@ -7,5 +7,7 @@ namespace Library.MVC.Models
 {
     public class DeleteMemberViewModel
     {
+        public int SSN { get; set; }
+            public string Name { get; set; }
     }
 }

@@ -34,5 +34,6 @@ namespace Library.Application.Interfaces
 
         void UpdateCopy(BookCopy copy);
 
+        List<BookDetails> GetAllAvailableBooks();
     }
 }

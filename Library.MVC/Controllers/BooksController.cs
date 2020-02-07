@@ -128,32 +128,6 @@ namespace Library.MVC.Controllers
             bookService.UpdateBook(bookDetails);
                                  
             return RedirectToAction(nameof(Index));
-
-            //    if (id != bookDetails.Id)
-            //    {
-            //        return NotFound();
-            //    }
-
-            //    if (ModelState.IsValid)
-            //    {
-            //        try
-            //        {
-            //        }
-            //        catch (DbUpdateConcurrencyException)
-            //        {
-            //            if (!bookDetails.Exists(bookDetails.Id))
-            //            {
-            //                return NotFound();
-            //            }
-            //            else
-            //            {
-            //                throw;
-            //            }
-            //        }
-            //        return RedirectToAction(nameof(Index));
-            //    }
-            //    ViewData["authorid"] = new SelectList(_context.authors, "id", "id", bookDetails.AuthorId);
-            //    return View(bookDetails);
         }
 
         // GET: Books/Delete/5
@@ -185,8 +159,13 @@ namespace Library.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
+            var bookDetails = bookService.GetBook(id);
+            if (bookDetails.Copies.Any(x => x.LoanStart == null))
+            {
             bookService.DeleteBook(id);
             return RedirectToAction(nameof(Index));
+            }
+            return View("BookUnavaliable");
         }
 
         public IActionResult CopyInfo(int id)

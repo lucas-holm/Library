@@ -37,6 +37,12 @@
     <Compile Remove="Migrations\20200201102043_BookStatus.Designer.cs" />
     <Compile Remove="Migrations\20200203114706_initial.cs" />
     <Compile Remove="Migrations\20200203114706_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200206091940_initial.cs" />
+    <Compile Remove="Migrations\20200206091940_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200206093426_loanreturned.cs" />
+    <Compile Remove="Migrations\20200206093426_loanreturned.Designer.cs" />
+    <Compile Remove="Migrations\20200207085441_fee.cs" />
+    <Compile Remove="Migrations\20200207085441_fee.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

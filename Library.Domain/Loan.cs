@@ -12,5 +12,24 @@ namespace Library.Domain
         public DateTime LoanStart { get; set; }
         public DateTime LoanEnd { get; set; }
         public DateTime? LoanReturned { get; set; }
+        public int Fee
+        {
+            get
+            {
+                var feeTotal = 0;
+                var feeIncrease = 12;
+                var daysDelayed = (DateTime.Now - LoanEnd).Days;
+
+                if(daysDelayed >= 0)
+                {
+                    if(daysDelayed == 0)
+                    {
+                        return 12;
+                    }
+                    feeTotal = daysDelayed * feeIncrease;
+                }
+                return feeTotal;    
+            }
+        }
     }
 }

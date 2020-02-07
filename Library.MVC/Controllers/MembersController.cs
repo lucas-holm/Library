@@ -80,26 +80,29 @@ namespace Library.MVC.Controllers
         }
 
         // GET: Members/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditMember(int id)
         {
-            return View();
+            var vm = new EditMemberViewModel();
+            vm.MemberId = id;
+            return View(vm);
         }
 
         // POST: Members/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult EditMember(int id, EditMemberViewModel vm)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var member = memberService.GetMember(vm.MemberId);
+            member.Name = vm.Name;
+            member.SSN = vm.SSN;
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            memberService.UpdateMember(member);
+
+            return RedirectToAction(nameof(Index));
+            
+            
+                
+            
         }
 
         // GET: Members/Delete/5
@@ -129,8 +132,10 @@ namespace Library.MVC.Controllers
         {
             var vm = new CreateLoanViewModel();
             vm.MemberId = id;
-            vm.BookDetailsList = new SelectList(bookService.GetAllBooks(), "Id", "Title");
+
+            vm.BookDetailsList = new SelectList(bookService.GetAllAvailableBooks(), "Id", "Title");
             return View(vm);
+            
         }
 
         [HttpPost]
@@ -139,10 +144,10 @@ namespace Library.MVC.Controllers
         {
             var date = DateTime.Now;
             var loan = new Loan();
-            //vm.BookDetailsList = new SelectList(bookService.GetAllBooks(), "Id", "Title");
+
             var member = memberService.GetMember(vm.MemberId);
-            
             var copy = bookService.GetLoanCopy(vm.BookDetails.Id);
+
             loan.BookCopy = copy;
             loan.Member = member;
             loan.LoanStart = date;
@@ -153,7 +158,6 @@ namespace Library.MVC.Controllers
 
             memberService.UpdateMember(member);
 
-
             return RedirectToAction(nameof(Index));
         }
 
@@ -162,8 +166,8 @@ namespace Library.MVC.Controllers
         {
             var date = DateTime.Now;
             var copy = bookService.GetBookCopy(id);
-            //var member = memberService.GetMember(vmid);
             var loan = loanService.GetLoan(loanid);
+
             copy.LoanStart = null;
             loan.LoanReturned = date;
 
