@@ -23,10 +23,38 @@ namespace Library.MVC.Controllers
         }
 
         //GET: Books
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
             var vm = new IndexBookViewModel();
             vm.Books = bookService.GetAllBooks();
+
+            ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["AuthorSortParm"] = sortOrder == "Author" ? "author_desc" : "Author";
+            ViewData["CurrentFilter"] = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vm.Books = vm.Books.Where(x => x.Title.Contains(searchString)
+                                       || x.Author.Name.Contains(searchString)).ToList();
+            }
+
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    vm.Books = vm.Books.OrderByDescending(x => x.Title).ToList();
+                    break;
+                case "Author":
+                    vm.Books = vm.Books.OrderBy(x => x.Author.Name).ToList();
+                    break;
+                case "author_desc":
+                    vm.Books = vm.Books.OrderByDescending(x => x.Author.Name).ToList();
+                    break;
+                default:
+                    vm.Books = vm.Books.OrderBy(x => x.Title).ToList();
+                    break;
+            }
+
+                       
             return View(vm);
             
         }

@@ -9,12 +9,23 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find: <input class="form-control col-sm-3" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>ISBN</th>
-            <th>Titel</th>
-            <th>Författare</th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParm"]">Titel</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["AuthorSortParm"]">Författare</a></th>
             <th>Beskrivning</th>
             <th>Exemplar</th>
             <th></th>
