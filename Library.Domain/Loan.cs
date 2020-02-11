@@ -18,31 +18,14 @@ namespace Library.Domain
             get
             {
                 var feePerDay = 12;
-                var overdue = (DateTime.Now - LoanEnd).Days;
 
-                var returned = 0;
+                var daysOverdue = (LoanReturned.HasValue)
+                    ? (LoanReturned.Value - LoanEnd).Days 
+                    : (DateTime.Now - LoanEnd).Days;
 
-                if (LoanReturned.HasValue)
-                {
-                    returned = (LoanReturned.Value - LoanEnd).Days;
-                }
+                var fee = (daysOverdue >= 0) ? (daysOverdue * feePerDay) + feePerDay : 0;
 
-                if (overdue >= 0)
-                {
-                    if(LoanReturned != null)
-                    {
-                        return (returned * feePerDay) + feePerDay;
-                    }
-                    if(overdue == 0)
-                    {
-                        return feePerDay;
-                    }
-                    else
-                    {
-                        return (overdue * feePerDay) + feePerDay;
-                    }
-                }
-                return 0;    
+                return fee;
             }
         }
     }

@@ -130,7 +130,7 @@ namespace Library.MVC.Controllers
 
         public IActionResult CreateLoan(int id)
         {
-            var vm = new CreateLoanViewModel();
+            var vm = new CreateMemberLoanViewModel();
             vm.MemberId = id;
 
             vm.BookDetailsList = new SelectList(bookService.GetAllAvailableBooks(), "Id", "Title");
@@ -140,7 +140,7 @@ namespace Library.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateLoan(CreateLoanViewModel vm)
+        public IActionResult CreateLoan(CreateMemberLoanViewModel vm)
         {
             var date = DateTime.Now;
             var loan = new Loan();
