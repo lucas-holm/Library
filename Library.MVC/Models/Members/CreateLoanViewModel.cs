@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Library.MVC.Models.Loans
+namespace Library.MVC.Models.Members
 {
     public class CreateLoanViewModel
     {

@@ -34,8 +34,8 @@ namespace Library.MVC.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                vm.Books = vm.Books.Where(x => x.Title.Contains(searchString)
-                                       || x.Author.Name.Contains(searchString)).ToList();
+                vm.Books = vm.Books.Where(x => x.Title.ToUpper().Contains(searchString.ToUpper())
+                                       || x.Author.Name.ToUpper().Contains(searchString.ToUpper())).ToList();
             }
 
             switch (sortOrder)

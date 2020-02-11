@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Library.Domain
@@ -16,19 +17,32 @@ namespace Library.Domain
         {
             get
             {
-                var feeTotal = 0;
-                var feeIncrease = 12;
-                var daysDelayed = (DateTime.Now - LoanEnd).Days;
+                var feePerDay = 12;
+                var overdue = (DateTime.Now - LoanEnd).Days;
 
-                if(daysDelayed >= 0)
+                var returned = 0;
+
+                if (LoanReturned.HasValue)
                 {
-                    if(daysDelayed == 0)
-                    {
-                        return 12;
-                    }
-                    feeTotal = daysDelayed * feeIncrease;
+                    returned = (LoanReturned.Value - LoanEnd).Days;
                 }
-                return feeTotal;    
+
+                if (overdue >= 0)
+                {
+                    if(LoanReturned != null)
+                    {
+                        return (returned * feePerDay) + feePerDay;
+                    }
+                    if(overdue == 0)
+                    {
+                        return feePerDay;
+                    }
+                    else
+                    {
+                        return (overdue * feePerDay) + feePerDay;
+                    }
+                }
+                return 0;    
             }
         }
     }
