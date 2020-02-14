@@ -12,7 +12,5 @@ namespace Library.Application.Interfaces
         public Loan GetLoan(int id);
 
         public void UpdateLoan(Loan loan);
-
-        public List<Loan> GetActiveLoans();
     }
 }

@@ -1,88 +1,11 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-</head>
-<body>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div>
 
-    <canvas id="myChart" width="200" height="120"></canvas>
-    <script>
-
-        function GetJson(callback) {
-            var resp = [];
-
-            $.ajax({
-                type: "GET",
-                url: "/Home/JsonTest",
-                success: function (result) {
-                    resp.push(result);
-                    callback(result);
-                }
-            });
-
-            return resp;
-        }
-
-
-
-
-
-
-
-
-        var simpleData = GetJson(function (result) {
-
-            let data = [result.loansOverdue, result.members, result.loansNotReturned];
-
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Overdue', 'Members', 'Not returned', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: data,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-
-        });
-
-
-
-
-
-
-    </script>
-
-</body>
-</html>
-
+</div>
