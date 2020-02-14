@@ -16,6 +16,12 @@ namespace Library.Infrastructure.Services
         {
             this.context = context;
         }
+
+        public List<Loan> GetActiveLoans()
+        {
+            return context.Loans.ToList();
+        }
+
         public List<Loan> GetAllLoans()
         {
             return context.Loans.Include(x => x.Member).Include(x => x.BookCopy).ThenInclude(x => x.Details).ToList();
