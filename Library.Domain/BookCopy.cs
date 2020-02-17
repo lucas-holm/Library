@@ -10,11 +10,11 @@ namespace Library.Domain
         public int DetailsId { get; set; }
         public BookDetails Details { get; set; }
         public DateTime? LoanStart { get; set; }
-
+        public bool InCart { get; set; } = false;
         public BookStatus BookStatus {
             get
             {
-                if (LoanStart == null)
+                if (LoanStart == null && InCart == false)
                 {
                     return BookStatus.In;
                 }

@@ -24,13 +24,19 @@ namespace Library.Infrastructure.Services
 
         public IList<Member> GetAllMembers()
         {
-            return context.Members.OrderBy(x => x.Name).ToList();
+            return context.Members
+                .Include(x => x.ShoppingCart)
+                .ThenInclude(x => x.Copies)
+                .ThenInclude(x => x.Details)
+                .ThenInclude(x => x.Author)
+                .OrderBy(x => x.Name).ToList();
         }
 
         public Member GetMember(int id)
         {
             return context.Members
                 .Where(x => x.Id == id)
+                .Include(x => x.ShoppingCart)
                 .Include(x => x.Loans)
                 .ThenInclude(x => x.BookCopy)
                 .ThenInclude(x => x.Details)

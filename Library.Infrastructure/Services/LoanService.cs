@@ -29,7 +29,7 @@ namespace Library.Infrastructure.Services
 
         public Loan GetLoan(int id)
         {
-            return context.Loans.Where(x => x.Id == id).FirstOrDefault();
+            return context.Loans.Where(x => x.Id == id).Include(x => x.Member).FirstOrDefault();
         }
 
         public void UpdateLoan(Loan loan)

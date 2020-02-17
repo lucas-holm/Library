@@ -46,6 +46,11 @@ namespace Library.Infrastructure.Services
             return context.BookCopies.Where(x => x.DetailsId == id).Include(x => x.Details.Author).ToList();
         }
 
+        public List<BookCopy> GetAllBookCopies()
+        {
+            return context.BookCopies.ToList();
+        }
+
         public List<BookDetails> GetAllBooks()
         {
             return context.BookDetails.Include(x => x.Author).Include(y => y.Copies).ToList();
@@ -63,7 +68,11 @@ namespace Library.Infrastructure.Services
 
         public BookCopy GetLoanCopy(int id)
         {
-            return context.BookCopies.Where(x => x.DetailsId == id).FirstOrDefault(x => x.LoanStart == null);
+            return context.BookCopies
+                .Where(x => x.DetailsId == id)
+                .Include(x => x.Details)
+                .ThenInclude(x => x.Author)
+                .FirstOrDefault(x => x.LoanStart == null && x.InCart == false); //Behöver check här
         }
 
         public BookDetails ShowBookDetails(int? id)

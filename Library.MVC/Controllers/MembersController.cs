@@ -142,7 +142,7 @@ namespace Library.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateLoan(CreateMemberLoanViewModel vm)
         {
-            var date = DateTime.Now;
+            var date = DateTime.Today;
             var loan = new Loan();
 
             var member = memberService.GetMember(vm.MemberId);
@@ -152,19 +152,19 @@ namespace Library.MVC.Controllers
             loan.Member = member;
             loan.LoanStart = date;
             loan.BookCopy.LoanStart = date;
-            loan.LoanEnd = date.AddSeconds(10);
+            loan.LoanEnd = date.AddDays(14);
             
             member.Loans.Add(loan);
 
             memberService.UpdateMember(member);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), new { id = member.Id});
         }
 
         
         public IActionResult ReturnCopy(int loanid, int id, int vmid)
         {
-            var date = DateTime.Now;
+            var date = DateTime.Today;
             var copy = bookService.GetBookCopy(id);
             var loan = loanService.GetLoan(loanid);
 
@@ -176,7 +176,7 @@ namespace Library.MVC.Controllers
             
 
             
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), new { id = loan.Member.Id });
         }
     }
 }
