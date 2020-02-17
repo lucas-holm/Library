@@ -13,6 +13,7 @@ namespace Library.MVC.Models.Loans
         public SelectList MemberList { get; set; }
         public SelectList BookDetailsList { get; set; }
         public BookDetails BookDetails { get; set; }
+        public IList<Member> Members { get; set; } = new List<Member>();
 
     }
 }

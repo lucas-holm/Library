@@ -37,11 +37,15 @@
                 @Html.DisplayFor(modelItem => item.LoanStart)
             </td>
             <td>
-                @if (item.LoanReturned == null && DateTime.Now > item.LoanEnd)
+                @if (item.LoanReturned == null && DateTime.Today == item.LoanEnd)
                 {
-                    <span style="color:red;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
+                    <span style="color:yellow;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
                 }
 
+                else if (item.LoanReturned != null && item.LoanEnd > item.LoanReturned)
+                {
+                    <span style="color:green;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
+                }
                 else if (item.LoanReturned > item.LoanEnd)
                 {
                     <span style="color:red;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>

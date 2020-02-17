@@ -21,9 +21,9 @@ namespace Library.Domain
 
                 var daysOverdue = (LoanReturned.HasValue)
                     ? (LoanReturned.Value - LoanEnd).Days 
-                    : (DateTime.Now - LoanEnd).Days;
+                    : (DateTime.Today - LoanEnd).Days;
 
-                var fee = (daysOverdue >= 0) ? (daysOverdue * feePerDay) + feePerDay : 0;
+                var fee = (daysOverdue >= 1) ? (daysOverdue * feePerDay) : 0;
 
                 return fee;
             }

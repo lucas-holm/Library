@@ -63,7 +63,11 @@ namespace Library.Infrastructure.Services
 
         public BookCopy GetLoanCopy(int id)
         {
-            return context.BookCopies.Where(x => x.DetailsId == id).FirstOrDefault(x => x.LoanStart == null);
+            return context.BookCopies
+                .Where(x => x.DetailsId == id)
+                .Include(x => x.Details)
+                .ThenInclude(x => x.Author)
+                .FirstOrDefault(x => x.LoanStart == null && x.InCart == false); //Behöver check här
         }
 
         public BookDetails ShowBookDetails(int? id)

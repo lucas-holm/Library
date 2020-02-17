@@ -4,14 +4,16 @@ using Library.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200215101013_ShoppingCart")]
+    partial class ShoppingCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,9 +66,6 @@ namespace Library.Infrastructure.Migrations
                     b.Property<int>("DetailsId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("InCart")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("LoanStart")
                         .HasColumnType("datetime2");
 
@@ -86,22 +85,19 @@ namespace Library.Infrastructure.Migrations
                         {
                             Id = 1,
                             Condition = 0,
-                            DetailsId = 1,
-                            InCart = false
+                            DetailsId = 1
                         },
                         new
                         {
                             Id = 2,
                             Condition = 2,
-                            DetailsId = 2,
-                            InCart = false
+                            DetailsId = 2
                         },
                         new
                         {
                             Id = 3,
                             Condition = 1,
-                            DetailsId = 3,
-                            InCart = false
+                            DetailsId = 3
                         });
                 });
 
