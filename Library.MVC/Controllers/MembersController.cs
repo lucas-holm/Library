@@ -158,7 +158,7 @@ namespace Library.MVC.Controllers
 
             memberService.UpdateMember(member);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), new { id = member.Id});
         }
 
         
@@ -176,7 +176,7 @@ namespace Library.MVC.Controllers
             
 
             
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), new { id = loan.Member.Id });
         }
     }
 }

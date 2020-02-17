@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Text;
 
@@ -10,8 +11,11 @@ namespace Library.Domain
         public int Id { get; set; }
         public BookCopy BookCopy { get; set; }
         public Member Member { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime LoanStart { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime LoanEnd { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime? LoanReturned { get; set; }
         public int Fee
         {

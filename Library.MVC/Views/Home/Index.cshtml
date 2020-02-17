@@ -34,13 +34,13 @@
 
         var simpleData = GetJson(function (result) {
 
-            let data = [result.loansOverdue, result.members, result.loansNotReturned];
+            let data = [result.allBookCopies, result.loansNotReturned];
 
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['Overdue', 'Members', 'Not returned', 'Green', 'Purple', 'Orange'],
+                    labels: ['All books', 'Not returned'],
                     datasets: [{
                         label: '# of Votes',
                         data: data,

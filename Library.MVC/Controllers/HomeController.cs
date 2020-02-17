@@ -16,12 +16,14 @@ namespace Library.MVC.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ILoanService loanService;
         private readonly IMemberService memberService;
+        private readonly IBookService bookService;
 
-        public HomeController(ILogger<HomeController> logger, ILoanService loanService, IMemberService memberService)
+        public HomeController(ILogger<HomeController> logger, ILoanService loanService, IMemberService memberService, IBookService bookService)
         {
             _logger = logger;
             this.loanService = loanService;
             this.memberService = memberService;
+            this.bookService = bookService;
         }
 
         public IActionResult Index()
@@ -32,18 +34,17 @@ namespace Library.MVC.Controllers
 
         public IActionResult JsonTest()
         {
-
+            var allBookCopies = bookService.GetAllBookCopies().Count();
             var allLoans = loanService.GetAllLoans();
 
             var loansNotReturned = allLoans.Where(x => x.LoanReturned == null).Count();
-            var loansOverdue = allLoans.Where(x => x.Fee > 0).Count();
+            //var loansOverdue = allLoans.Where(x => x.Fee > 0).Count();
             var members = memberService.GetAllMembers().Count();
 
             return Json(new
             {
                 loansNotReturned,
-                loansOverdue,
-                members
+                allBookCopies
             });
         }
 

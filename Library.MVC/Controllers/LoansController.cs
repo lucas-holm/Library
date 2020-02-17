@@ -68,7 +68,6 @@ namespace Library.MVC.Controllers
                     newLoan.Member = member;
                     newLoan.LoanStart = date;                  
                     newLoan.LoanEnd = date.AddDays(14);
-                    
 
                     foreach (var copy in member.ShoppingCart.Copies.ToList())
                     {
@@ -98,8 +97,6 @@ namespace Library.MVC.Controllers
             copy.InCart = true;
             member.ShoppingCart.Copies.Add(copy);
             memberService.UpdateMember(member);
-
-            //vm.ShoppingCart.Add(copy);
 
             return RedirectToAction(nameof(CreateLoan));
         }
