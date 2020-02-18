@@ -83,10 +83,8 @@ namespace Library.MVC.Controllers
 
             var member = memberService.GetMember(vm.Member.Id);
             var copy = bookService.GetLoanCopy(vm.BookDetails.Id);
-            if (member.ShoppingCart == null)
-            {
-                member.ShoppingCart = new ShoppingCart();
-            }
+
+            member.ShoppingCart ??= new ShoppingCart();
 
             copy.InCart = true;
             member.ShoppingCart.Copies.Add(copy);
@@ -94,6 +92,21 @@ namespace Library.MVC.Controllers
             memberService.UpdateMember(member);
 
             return RedirectToAction(nameof(CreateLoan));
+        }
+        public IActionResult ReturnBook(int copyId, int loanId)
+        {
+
+            var date = DateTime.Today;
+            var copy = bookService.GetBookCopy(copyId);
+            var loan = loanService.GetLoan(loanId);
+
+            copy.LoanStart = null;
+            loan.LoanReturned = date;
+
+            loanService.UpdateLoan(loan);
+            bookService.UpdateCopy(copy);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

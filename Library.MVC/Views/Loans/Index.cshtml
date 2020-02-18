@@ -80,7 +80,7 @@
                     @Html.DisplayFor(modelItem => item.Fee)
                 </td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="ReturnBook" asp-route-copyId="@item.BookCopy.Id" asp-route-loanId="@item.Id">Return Book</a>
                 </td>
             </tr>
         }
