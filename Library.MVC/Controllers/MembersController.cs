@@ -19,7 +19,6 @@ namespace Library.MVC.Controllers
         private readonly IBookService bookService;
         private readonly ILoanService loanService;
 
-
         public MembersController(IMemberService memberService, IBookService bookService, ILoanService loanService)
         {
             this.memberService = memberService;
@@ -63,7 +62,6 @@ namespace Library.MVC.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
                 var member = new Member();
                 member.Name = vm.Name;
                 member.SSN = vm.SSN;
@@ -100,32 +98,6 @@ namespace Library.MVC.Controllers
 
             return RedirectToAction(nameof(Index));
             
-            
-                
-            
-        }
-
-        // GET: Members/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Members/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         public IActionResult CreateLoan(int id)
@@ -161,7 +133,6 @@ namespace Library.MVC.Controllers
             return RedirectToAction(nameof(Details), new { id = member.Id});
         }
 
-        
         public IActionResult ReturnCopy(int loanid, int id, int vmid)
         {
             var date = DateTime.Today;
@@ -173,8 +144,6 @@ namespace Library.MVC.Controllers
 
             loanService.UpdateLoan(loan);
             bookService.UpdateCopy(copy);
-            
-
             
             return RedirectToAction(nameof(Details), new { id = loan.Member.Id });
         }

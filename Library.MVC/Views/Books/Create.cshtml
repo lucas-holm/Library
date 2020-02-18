@@ -24,7 +24,6 @@
             </div>
             <div class="form-group">
                 <label asp-for="Author" class="control-label"></label>
-                @*Html.DropDownListFor(m => m.AuthorId, Model.AuthorList, "Välj författare")*@
                 <select asp-for="Author.Id" class="form-control" asp-items="Model.AuthorList"></select>
             </div>
             <div class="form-group">

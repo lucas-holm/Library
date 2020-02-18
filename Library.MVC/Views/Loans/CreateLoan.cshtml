@@ -12,7 +12,6 @@
     <div class="col-md-4">
         <form asp-action="AddLoan">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<input type="hidden" asp-for="Id" />*@
             <div class="form-group">
                 <label asp-for="Member" class="control-label"></label>
                 <select asp-for="Member.Id" class="form-control" asp-items="Model.MemberList"></select>
@@ -42,27 +41,24 @@
     <tbody>
         @foreach (var item in Model.Members)
         {
-
             @if (item.ShoppingCart != null)
             {
-        <tr>
-            @foreach (var copy in item.ShoppingCart.Copies)
-            {
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => copy.Details.Author.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => copy.Details.Title)
-                </td>
-            }
-        </tr>
-            }
-
-        }
-
+                @foreach (var copy in item.ShoppingCart.Copies)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => copy.Details.Author.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => copy.Details.Title)
+                        </td>
+                    </tr>
+                 }
+             }
+         }
     </tbody>
 </table>
 

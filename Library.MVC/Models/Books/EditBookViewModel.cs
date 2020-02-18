@@ -14,6 +14,7 @@ namespace Library.MVC.Models
         [Required]
         public string Title { get; set; }
         [Required]
+        [RegularExpression("([0-9]+)", ErrorMessage = "Please enter a valid number.")]
         public string ISBN { get; set; }
         public Author Author { get; set; }
         public int AuthorId { get; set; }

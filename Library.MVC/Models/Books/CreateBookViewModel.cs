@@ -10,13 +10,13 @@ namespace Library.MVC.Models
 {
     public class CreateBookViewModel
     {
-        [Display(Name = "Titel")]
         [Required]
         public string Title { get; set; }
-        [Display(Name = "Författare")]
+        [Display(Name = "Authors")]
         public SelectList AuthorList { get; set; }
         public Author Author { get; set; }
         [Required]
+        [RegularExpression("([0-9]+)", ErrorMessage = "Please enter a valid number.")]
         public string ISBN { get; set; }
         [Required]
         public string Description { get; set; }

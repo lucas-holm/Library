@@ -123,14 +123,17 @@ namespace Library.MVC.Controllers
             {
                 return NotFound();
             }
+
             var bookDetails = bookService.ShowBookDetails(id);
             var vm = new EditBookViewModel();
+
             vm.AuthorList = new SelectList(authorService.GetAllAuthors(), "Id", "Name");
             vm.Author = bookDetails.Author;
             vm.BookDetailsId = bookDetails.Id;
             vm.ISBN = bookDetails.ISBN;
             vm.Title = bookDetails.Title;
             vm.Description = bookDetails.Description;
+
             if (bookDetails == null)
             {
                 return NotFound();
@@ -145,7 +148,6 @@ namespace Library.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, EditBookViewModel vm)
         {
-
             var bookDetails = bookService.ShowBookDetails(id);
 
             bookDetails.AuthorId = vm.AuthorId;
@@ -172,7 +174,6 @@ namespace Library.MVC.Controllers
             vm.Title = bookDetails.Title;
             vm.ISBN = bookDetails.ISBN;
             vm.Description = bookDetails.Description;
-
 
             if (bookDetails == null)
             {
@@ -231,7 +232,6 @@ namespace Library.MVC.Controllers
         {
             var bookDetails = bookService.GetBook(vm.BookDetailsId);
             
-
             for (int i = 0; i < vm.NumberOfCopies; i++)
             {
                 bookDetails.Copies.Add(new BookCopy());
@@ -246,6 +246,7 @@ namespace Library.MVC.Controllers
         {
             var vm = new DeleteCopyViewModel();
             var copy = bookService.GetBookCopy(id);
+            
             vm.BookStatus = copy.BookStatus;
             vm.Condition = copy.Condition;
             vm.Id = id;
@@ -257,8 +258,16 @@ namespace Library.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteCopyConfirmed(int id)
         {
-            bookService.DeleteCopy(id);
-            return RedirectToAction(nameof(Index));
+            var bookCopy = bookService.GetBookCopy(id);
+            if(bookCopy.BookStatus != Domain.Enums.BookStatus.Out)
+            {
+                bookService.DeleteCopy(id);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View("BookUnavaliable");
+            }
         }
     }
 }

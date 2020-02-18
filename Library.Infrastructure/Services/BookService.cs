@@ -72,7 +72,7 @@ namespace Library.Infrastructure.Services
                 .Where(x => x.DetailsId == id)
                 .Include(x => x.Details)
                 .ThenInclude(x => x.Author)
-                .FirstOrDefault(x => x.LoanStart == null && x.InCart == false); //Behöver check här
+                .FirstOrDefault(x => x.LoanStart == null && x.InCart == false);
         }
 
         public BookDetails ShowBookDetails(int? id)

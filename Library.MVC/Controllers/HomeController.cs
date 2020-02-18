@@ -34,17 +34,21 @@ namespace Library.MVC.Controllers
 
         public IActionResult JsonTest()
         {
-            var allBookCopies = bookService.GetAllBookCopies().Count();
+            var allCopies = bookService.GetAllBookCopies();
             var allLoans = loanService.GetAllLoans();
-
+            
             var loansNotReturned = allLoans.Where(x => x.LoanReturned == null).Count();
-            //var loansOverdue = allLoans.Where(x => x.Fee > 0).Count();
+            var allAvailableBooks = allCopies.Where(x => x.LoanStart == null).Count();
+
+            var booksWithFee = allLoans.Where(x => x.Fee > 0).Count();
+            
             var members = memberService.GetAllMembers().Count();
 
             return Json(new
             {
+                booksWithFee,
                 loansNotReturned,
-                allBookCopies
+                allAvailableBooks
             });
         }
 

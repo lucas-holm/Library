@@ -23,65 +23,66 @@
     <tbody>
         @foreach (var item in Model.Loans)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookCopy.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Member.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookCopy.Details.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoanStart)
-            </td>
-            <td>
-                @if (item.LoanReturned == null && DateTime.Today == item.LoanEnd)
-                {
-                    <span style="color:yellow;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
-                }
-
-                else if (item.LoanReturned != null && item.LoanEnd > item.LoanReturned)
-                {
-                    <span style="color:green;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
-                }
-                else if (item.LoanReturned > item.LoanEnd)
-                {
-                    <span style="color:red;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
-                }
-                else
-                {
-                    @Html.DisplayFor(modelItem => item.LoanEnd)
-                }
-
-            </td>
-            <td>
-                @if (item.LoanReturned == null)
-                {
-
-                }
-                else
-                {
-                    @if (item.LoanReturned > item.LoanEnd)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookCopy.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookCopy.Details.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoanStart)
+                </td>
+                <td>
+                    @if (item.LoanReturned == null && DateTime.Today == item.LoanEnd)
                     {
-                        <span style="color:red;">@Html.DisplayFor(modelItem => item.LoanReturned)</span>
+                        <span style="color:sandybrown;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
+                    }
+                    else if (item.LoanReturned != null && item.LoanEnd >= item.LoanReturned)
+                    {
+                        <span style="color:green;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
+                    }
+                    else if (item.LoanReturned == null && item.LoanEnd < DateTime.Today)
+                    {
+                        <span style="color:red;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
+                    }
+                    else if (item.LoanReturned > item.LoanEnd)
+                    {
+                        <span style="color:red;">@Html.DisplayFor(modelItem => item.LoanEnd)</span>
                     }
                     else
                     {
-                        <span style="color:green;">@Html.DisplayFor(modelItem => item.LoanReturned)</span>
+                        @Html.DisplayFor(modelItem => item.LoanEnd)
+                    }
+                </td>
+                <td>
+                    @if (item.LoanReturned == null)
+                    {
+
+                    }
+                    else
+                    {
+                        @if (item.LoanReturned > item.LoanEnd)
+                        {
+                            <span style="color:red;">@Html.DisplayFor(modelItem => item.LoanReturned)</span>
+                        }
+                        else if(item.LoanReturned <= item.LoanEnd)
+                        {
+                            <span style="color:green;">@Html.DisplayFor(modelItem => item.LoanReturned)</span>
+                        }
                     }
 
-                }
-
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fee)
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fee)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

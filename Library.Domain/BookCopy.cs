@@ -21,8 +21,6 @@ namespace Library.Domain
 
                 return BookStatus.Out;
             }
-        }
-
-        
+        }            
     }
 }

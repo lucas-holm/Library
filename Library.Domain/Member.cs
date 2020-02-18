@@ -11,6 +11,5 @@ namespace Library.Domain
         public string Name { get; set; }
         public ICollection<Loan> Loans { get; set; } = new List<Loan>();
         public ShoppingCart ShoppingCart { get; set; }
-        
     }
 }
